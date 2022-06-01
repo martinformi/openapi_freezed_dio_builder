@@ -864,10 +864,12 @@ class OpenApiCodeBuilder extends Builder {
 //    print(DartFormatter().format('${l.accept(emitter)}'));
     //print('inputId: $inputId / outputId: $outputId');
     await buildStep.writeAsString(outputId, libraryOutput);
-    Future<void>.delayed(Duration(seconds: 1)).then((_) {
-      // no idea what I'm doing
-      File(outputId.path).rename(outputId.path.replaceAll('openapi.', ''));
-    });
+    // Yes, I also do not know, but this basically deleted .openapi part of the file, which leads to 
+    // AssetNotFoundException and infinite building loop
+    //     Future<void>.delayed(Duration(seconds: 1)).then((_) {
+    // no idea what I'm doing
+    //       File(outputId.path).rename(outputId.path.replaceAll('openapi.', ''));
+    //     });
   }
 
   @override
